@@ -2,11 +2,8 @@ tr.selected {
     background-color: #a6a6a6;
 }
 
-th {
-    text-align: center;
-}
-
-td {
+th, td, .center-text
+{
     text-align: center;
 }
 

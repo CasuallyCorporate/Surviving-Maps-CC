@@ -1,9 +1,9 @@
 [
   {
-    "date": "19 06 2060",
+    "date": "1.0.0",
     "items": [
-      "Added Options for B&B and B&B+GP",
-      "Added temp content to other pages"
+      "Changed site visuals to correctly convey the hosting and maintenence situation",
+      "Changed hover visual elements for greater clarity"
     ]
   }
 ]
