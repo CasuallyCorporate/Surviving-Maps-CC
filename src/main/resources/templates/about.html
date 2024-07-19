@@ -16,8 +16,13 @@
 
 <div style="padding-top: 100px"/>
 
-<div id="aboutId" th:include="fragments/aboutFragments :: aboutList(${list})"/>
+<div id="changeId" th:include="fragments/aboutFragments :: changeList(${newlist})"/>
 
+<hr>
+
+<h3>Original contributions: </h3><h4>https://github.com/trickster-is-weak/Surviving-Maps</h4>
+
+<div id="aboutId" th:include="fragments/aboutFragments :: aboutList(${oldlist})"/>
 
 <div style="padding-top: 100px"/>
 <footer style="padding-top: 100px" th:include="fragments/fragments :: footer"></footer>
