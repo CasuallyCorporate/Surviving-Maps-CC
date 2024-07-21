@@ -12,29 +12,24 @@
 <body>
 
 <nav th:include="fragments/fragments :: navigation"></nav>
-<div class="container" style="padding-top: 70px"/>
 
-<div>
+
+<div class="container border" style="padding-top: 70px">
+
     <div id="formDiv" th:include="fragments/complexFragments :: filter(${filter})"></div>
 
-</div>
-
-
-<div class="border" id="displayViewer" onclick="getDisplay()"
-     style="padding-top: 20px;padding-bottom: 20px; min-height: 80px; ">
-    <div style="text-align: center; vertical-align: central; padding: 5px">
-        Select a landing site for more information
+    <div class="border" id="displayViewer" onclick="getDisplay()"
+        style="padding-top: 20px; padding-bottom: 20px; min-height: 80px; ">
+        <div style="text-align: center; vertical-align: central; padding: 5px">
+            Select a landing site for more information
+        </div>
     </div>
-</div>
 
-<div style="padding: 10px"/>
-
-<div id="tableDiv" th:include="fragments/simpleFragments :: table(${sites})">
+    <div id="tableDiv" th:include="fragments/simpleFragments :: table(${sites})"></div>
 
 </div>
 
 
-<div style="padding: 70px"/>
 <footer th:include="fragments/fragments :: footer"></footer>
 
 </body>

@@ -7,6 +7,11 @@ th, td, .center-text
     text-align: center;
 }
 
+hr {
+    margin-top: 0;
+    margin-bottom: 0;
+}
+
 .multiselect.dropdown-toggle {
     text-align: left !important
 }
