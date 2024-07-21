@@ -3,7 +3,7 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 
 <head>
-    <title>Surviving Maps</title>
+    <title>Surviving Maps | Changelog</title>
     <meta content="text/html; charset=UTF-8" http-equiv="Content-Type"/>
     <template th:include="fragments/fragments :: header" th:remove="tag"></template>
     <link rel="stylesheet" th:href="@{css/custom.css}">
@@ -16,8 +16,19 @@
 
 <div style="padding-top: 100px"/>
 
-<div id="aboutId" th:include="fragments/aboutFragments :: aboutList(${list})"/>
+<div class="center-text">
+    <h3>Surviving-Maps-CC</h3>
+</div>
 
+<div id="changeId" th:include="fragments/aboutFragments :: changeList(${newlist})"/>
+
+<hr>
+<div class="center-text">
+<h3>Original contributions: </h3>
+<h4>https://github.com/trickster-is-weak/Surviving-Maps</h4>
+</div>
+
+<div id="aboutId" th:include="fragments/aboutFragments :: aboutList(${oldlist})"/>
 
 <div style="padding-top: 100px"/>
 <footer style="padding-top: 100px" th:include="fragments/fragments :: footer"></footer>

@@ -3,7 +3,7 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 
 <head>
-    <title>Surviving Maps</title>
+    <title>Surviving Maps | FAQ</title>
     <meta content="text/html; charset=UTF-8" http-equiv="Content-Type"/>
     <object th:include="fragments/fragments :: header" th:remove="tag"/>
     <link rel="stylesheet" th:href="@{css/custom.css}">
@@ -64,7 +64,7 @@
             </div>
             <div aria-labelledby="headingThree" class="collapse" data-parent="#accordionExample" id="collapseThree">
                 <div class="card-body">
-                    Please raise any bugs/feature requests on GitHub.
+                    Please raise any bugs/feature requests on the GitHub <a href="https://github.com/CasuallyCorporate/Surviving-Maps-CC/discussions">discussion page</a>.
                 </div>
             </div>
         </div>
@@ -81,15 +81,11 @@
             <div aria-labelledby="headingFour" class="collapse" data-parent="#accordionExample" id="collapseFour">
                 <div class="card-body">
                     <p>
-                        Honestly, the development work is almost done, however, I'm no expert in the web side of things.
-                        So if
-                        you are a web-developer with HTML, Javascript or CSS knowledge, feel free to get in touch.
+                        This isn't an 'active' project in the normal sense of the word.
+                        The original project (as far as I can tell) has not been maintained since 2022.
+                        I'm going to be focusing on the architecture of how this project works rather than the code.
+                        The aim is to get this project as cache-able as possible, so that responsiveness is more tolerable.
                     </p>
-                    <p>Otherwise, please consider donating to the Ko-Fi link at the top. The hosting costs me £10 per
-                        month, and I've made the decision to see how the funding is going every 3 months.
-                        At the moment, 80% of the costs have been from me. Even a small donation helps.</p>
-                    <p> Alternatively, if you have a web-server that can host a Spring Boot app for free, the community
-                        will be grateful.</p>
                 </div>
             </div>
         </div>
@@ -99,25 +95,15 @@
                     <button aria-controls="collapseFive" aria-expanded="false"
                             class="btn btn-link btn-block text-left collapsed"
                             data-target="#collapseFive" data-toggle="collapse" type="button">
-                        When is the next update?
+                        Can I contribute? Help with costs?
                     </button>
                 </h2>
             </div>
             <div aria-labelledby="headingFive" class="collapse" data-parent="#accordionExample" id="collapseFive">
                 <div class="card-body">
-                    <p> Good Question... I don't know is the honest answer. It will depend on a few things like: bugs,
-                        features and efficiency improvements.
-                        I try to test the updates locally before any update, both using automated and manual testing,
-                        but that's not perfect.</p>
-                    <p> Any small bugs are usually ironed out fairly quickly, but I can only address what I know, so
-                        please raise bug reports.</p>
-                    <p>Features are done on a slower timeframe, so maybe monthly. The about page shows the change
-                        log.</p>
-                    <p>Efficiency improvements are usually addressed when they cause issues.
-                        For example, in the first few weeks, I managed to reduce the RAM footprint substantially and
-                        that cut the hosting costs down and made the user experience marginally faster.
-                        These take a while and I don't envisage many of these occurring. When these backend changes take
-                        place, I try to leave the frontend the same to narrow down sources of error. </p>
+                    <p>If you believe I do deserve some kickback for hosting/updating this, I would ask that you support my efforts with Anti-Real Media through the Ko-Fi instead with a one-time support: <a href="https://ko-fi.com/antirealmedia">https://ko-fi.com/antirealmedia</a></p>
+                    <p>This is because I genuinely don't need the money personally, but I am slowly setting up a pathway for people to learn programming generically, make their own game-development (or software) portfolio, and engage in game development in a more professional environment.</p>
+                    <p>More info here: <a href="https://anti-real.media/">https://anti-real.media/</a> (Apologies, The website is always in various stages of readiness...) </p>
                 </div>
             </div>
         </div>

@@ -20,8 +20,8 @@ public class AboutController {
     @GetMapping("/about")
     public ModelAndView about() {
         ModelAndView mav = new ModelAndView("about");
-        mav.addObject("list", aboutService.getAboutHistory());
+        mav.addObject("oldlist", aboutService.getAboutHistory(false));
+        mav.addObject("newlist", aboutService.getAboutHistory(true));
         return mav;
     }
-
 }
