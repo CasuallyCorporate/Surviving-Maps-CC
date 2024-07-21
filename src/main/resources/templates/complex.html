@@ -17,6 +17,8 @@
 <div class="container border" style="padding-top: 70px">
 
     <div id="formDiv" th:include="fragments/complexFragments :: filter(${filter})"></div>
+    
+    <div id="SearchButton" th:include="fragments/fragments :: SearchButton"></div>
 
     <div class="border" id="displayViewer" onclick="getDisplay()"
         style="padding-top: 20px; padding-bottom: 20px; min-height: 80px; ">
