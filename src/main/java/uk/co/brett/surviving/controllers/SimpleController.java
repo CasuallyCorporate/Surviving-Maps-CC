@@ -47,11 +47,13 @@ public class SimpleController {
     @GetMapping("/simple")
     public ModelAndView simple() {
         mav.setViewName("simple");
+        
         SimpleFilterRequest filter = new SimpleFilterRequest();
         List<Breakthrough> breakthroughs = Breakthrough.filterVariant(filter.getVariant());
 
         mav.addObject(FILTER, filter);
         mav.addObject(BREAKTHROUGHS, breakthroughs);
+        
         return mav;
     }
 
@@ -69,7 +71,6 @@ public class SimpleController {
         LOGGER.info("Filter completed");
         return mav;
     }
-
 
     @GetMapping(value = "/getDisplay")
     public ModelAndView display(@RequestParam(name = "id") final Long id) {
