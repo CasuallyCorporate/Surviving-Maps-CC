@@ -52,6 +52,7 @@ hr {
     cursor: pointer;
     border-radius: 2px;
     margin: 1rem auto;
+    user-select: none;
 }
 
 #SearchButton a:hover {
