@@ -9,8 +9,13 @@ function rowClicked(id, site) {
     console.log(site);
 
     let row = $("#" + id);
+    
+    if (row.hasClass("selected")) {
+        return;
+    }
+    
     let selected = row.hasClass("selected");
-    console.log("selected = " + selected);
+    //console.log("selected = " + selected);
 
     $('#searchResultTable tbody > tr').removeClass('selected');
 
@@ -27,6 +32,9 @@ function rowClicked(id, site) {
 
 function getDisplay(obj) {
     console.log("get Display");
+    if(!obj) {
+        return;
+    }
 
     if (obj == null) {
         $('#searchResultTable tbody > tr').removeClass('selected');
