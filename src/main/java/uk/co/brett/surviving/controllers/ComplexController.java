@@ -36,15 +36,15 @@ public class ComplexController {
 
     @GetMapping("/complex")
     public ModelAndView complex() {
+        mav.setViewName("complex");
 
         ComplexFilterRequest filter = new ComplexFilterRequest();
         List<Breakthrough> breakthroughs = Breakthrough.filterVariant(filter.getVariant());
 
-        mav.setViewName("complex");
         mav.addObject(FILTER, filter);
         mav.addObject(BREAKTHROUGHS, breakthroughs);
-        filterService.getAll();
-        mav.addObject(SITE_LIST, filterService.getAll());
+        //filterService.getAll();
+        //mav.addObject(SITE_LIST, filterService.getAll());
         mav.addObject(LANDING_AREA, NamedLandingArea.values());
         mav.addObject(TOPOGRAPHY, Topography.values());
         mav.addObject(MAP_NAME, MapName.values());
@@ -53,7 +53,6 @@ public class ComplexController {
 
     @PostMapping(value = "/complex")
     public ModelAndView complexFilter(@ModelAttribute ComplexFilterRequest filter) {
-
         List<Site> filtered = filterService.filter(filter);
         variant = filter.getVariant();
         List<Breakthrough> breakthroughs = Breakthrough.filterVariant(filter.getVariant());

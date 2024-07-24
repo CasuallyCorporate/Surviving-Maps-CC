@@ -6,7 +6,7 @@
 <head>
     <title>Surviving Maps</title>
 </head>
-<body>
+
 
 <th:block th:fragment="filter(filter)">
     <form class="mainform border-bottom" id="main_form"
@@ -16,7 +16,8 @@
         <div class="form-group">
             <div>
                 Other
-                <div class="row h-50 border" style="padding: 10px">
+                <hr/>
+                <div class="row h-50" style="padding: 10px">
                     <div class="col-md-3">
                         <label class="d-flex justify-content-between" for="gameVariant">Game Variant </label>
                         <select class="multiselect dropdown-toggle custom-select text-center" id="gameVariant"
@@ -51,7 +52,8 @@
             <div style="padding: 10px"></div>
             <div id="resources">
                 Resources
-                <div class="row h-50 border" style="padding: 10px">
+                <hr/>
+                <div class="row h-50" style="padding: 10px">
                     <div class="col-md-3" id="waterSelect">
                         <label for="water">Water</label>
                         <div class="row">
@@ -149,7 +151,8 @@
             <div style="padding: 10px"></div>
             <div id="disasters">
                 Disasters
-                <div class="row h-50 border" style="padding: 10px">
+                <hr/>
+                <div class="row h-50" style="padding: 10px">
                     <div class="col-md-3" id="meteorSelect">
                         <label for="meteor">Meteors</label>
                         <div class="row">
@@ -247,7 +250,8 @@
             <div style="padding: 10px"></div>
             <div id="mapDetails">
                 Map Details
-                <div class="row h-50 border" style="padding: 10px">
+                <hr/>
+                <div class="row h-50" style="padding: 10px">
                     <div class="col-md-3" id="landingAreaDiv">
                         <div id="innerNLA">
                             <label class="d-flex justify-content-between" for="landingArea-reset">
@@ -331,5 +335,5 @@
     </form>
 </th:block>
 
-</body>
+
 </html>

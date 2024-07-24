@@ -7,6 +7,11 @@ th, td, .center-text
     text-align: center;
 }
 
+hr {
+    margin-top: 0;
+    margin-bottom: 0;
+}
+
 .multiselect.dropdown-toggle {
     text-align: left !important
 }
@@ -17,4 +22,39 @@ th, td, .center-text
 
 .loading-icon {
     color: darkred;
+}
+
+.hover-content {
+    color: black;
+}
+
+.container .accordion {
+    margin-bottom: -4rem;
+}
+
+.container {
+    margin-bottom: 5rem;
+}
+
+#SearchButton #SearchWrap {
+    display: flex;
+    justify-content: center;
+}
+#SearchButton a {
+    color: #333 !important;
+    border: 1px solid rgba(0, 0, 0, 0.3);
+    background: linear-gradient(to bottom, rgba(230, 230, 230, 0.1) 0%, rgba(0, 0, 0, 0.1) 100%);
+    box-sizing: border-box;
+    display: inline-block;
+    min-width: 1.5em;
+    padding: 0.5em 1em;
+    text-align: center;
+    cursor: pointer;
+    border-radius: 2px;
+    margin: 1rem auto;
+    user-select: none;
+}
+
+#SearchButton a:hover {
+    background: linear-gradient(to bottom, rgba(230, 0, 0, 0.8) 0%, rgba(255, 0, 0, 0.7) 100%);
 }
