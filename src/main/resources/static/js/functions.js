@@ -4,6 +4,18 @@ $(document).ready(function () {
     console.log("top doc ready");
 });
 
+const _variantMap = new Map([
+        ["STANDARD",1],
+        ["GREEN_PLANET",2],
+        ["BELOW_BEYOND",3],
+        ["BEYOND_GREEN",4],
+        ["TITO_GREEN_PLANET",5],
+        ["EVANS_GREEN_PLANET",6]
+        ]);
+
+let _query = [];
+let _query64 = "";
+
 function rowClicked(id, site) {
     console.log(id);
     console.log(site);
@@ -31,15 +43,12 @@ function rowClicked(id, site) {
 }
 
 function getDisplay(obj) {
-    console.log("get Display");
-    if(!obj) {
+    console.log("get Display of site");
+    if(!obj || obj.id < 1) {
         return;
     }
 
-    if (obj == null) {
-        $('#searchResultTable tbody > tr').removeClass('selected');
-        obj = {'id': -1};
-    }
+    console.log("Site: " + obj.id);
 
     let display = $("#displayViewer");
     $.ajax({
@@ -123,10 +132,32 @@ function setFormTriggers() {
     $('#mapDetails').on("change", change);
 }
 
+let _dataTableDiv;
+
 function searchData() {
-    $(function () {
-        $("#tablebody").html(loading);
-        setTimeout(fetchData, 50);
+    let form = $("#main_form");
+    $("#tablebody").html(loading);
+    
+    $.ajax({
+        type: form.attr('method'),
+        url: form.attr('action'),
+        data: form.serialize(),
+        success: function (msg) {
+            successFn(msg);
+            _dataTableDiv = msg;
+        },
+        error: function (xhr) {
+            alert("Search Unavailable/ Query Invalid");
+            if (!_dataTableDiv) {
+                console.log("Cannot reload TableDiv. Likely null");
+            }
+            else
+            {
+                $("#tableDiv").html(_dataTableDiv);
+                dataTableFormat();
+            }
+            console.log(xhr.responseText);
+        }
     });
 }
 
@@ -166,26 +197,6 @@ let change = function formChange() {
     console.log("change is formChange");
     console.log("change fn");
     
-    let form = $("#main_form");
-    $("#tablebody").html(loading);
-
-    console.log(form);
-    console.log(form.attr('action'));
-    console.log(form.attr('method'));
-    console.log(form.serialize());
-
-    $.ajax({
-        type: form.attr('method'),
-        url: form.attr('action'),
-        data: form.serialize(),
-        success: function (msg) {
-            successFn(msg);
-        },
-        error: function (xhr) {
-            console.log(xhr.responseText);
-        }
-    });
-
     getDisplay();
     return false;
 };
