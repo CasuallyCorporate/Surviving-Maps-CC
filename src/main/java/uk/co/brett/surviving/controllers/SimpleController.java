@@ -73,21 +73,28 @@ public class SimpleController {
     }
 
     @GetMapping(value = "/getDisplay")
-    public ModelAndView display(@RequestParam(name = "id") final Long id) {
-        LOGGER.info("Selected ID: {}", id);
-        if (id == -1) {
+    public ModelAndView display(@RequestParam(name = "id") final Long req_id, @RequestParam(name = "variant") final String req_variant) {
+        LOGGER.info("Selected ID: {}", req_id);
+        if (req_id <= 0) {
             mav.setViewName("fragments/simpleFragments :: defaultDisplay");
             return mav;
         } else {
+            LOGGER.info("req_variant {}", req_variant);
+            LOGGER.info("Orig_Variant {}", variant);
+            GameVariant temp_variant = GameVariant.CAP_MAP.get(req_variant);
+            if (temp_variant != null) {
+                variant = temp_variant;
+            }
+            else
+            {
+                variant = GameVariant.STANDARD;
+            }
             mav.setViewName("fragments/simpleFragments :: display");
             LOGGER.info("display variant {}", variant);
-//            Site site = filterService.getSingle(id);
-//            site.getBreakthroughs(variant);
-            mav.addObject(SITE, filterService.getSingle(id));
+            mav.addObject(SITE, filterService.getSingle(req_id));
             mav.addObject("variant", variant);
             return mav;
         }
-
     }
 
 
@@ -106,6 +113,4 @@ public class SimpleController {
         mav.addObject(BREAKTHROUGHS, breakthroughs);
         return mav;
     }
-
-
 }
