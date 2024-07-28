@@ -14,6 +14,7 @@ public enum GameVariant {
     EVANS_GREEN_PLANET("Evans: Green Planet");
 
     private static final Map<String, GameVariant> ENUM_MAP;
+    public static final Map<String, GameVariant> CAP_MAP;
 
     static {
         Map<String, GameVariant> map = new ConcurrentHashMap<>();
@@ -21,6 +22,15 @@ public enum GameVariant {
             map.put(instance.getFormatted(), instance);
         }
         ENUM_MAP = Collections.unmodifiableMap(map);
+        
+        Map<String, GameVariant> capmap = new ConcurrentHashMap<>();
+        capmap.put("STANDARD", STANDARD);
+        capmap.put("GREEN_PLANET", GREEN_PLANET);
+        capmap.put("BELOW_BEYOND", BELOW_BEYOND);
+        capmap.put("BEYOND_GREEN", BEYOND_GREEN);
+        capmap.put("TITO_GREEN_PLANET", TITO_GREEN_PLANET);
+        capmap.put("EVANS_GREEN_PLANET", EVANS_GREEN_PLANET);
+        CAP_MAP = Collections.unmodifiableMap(capmap);
     }
 
     private final String formatted;

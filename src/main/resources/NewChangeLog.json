@@ -1,5 +1,12 @@
 [
   {
+    "date": "1.0.1",
+    "items": [
+      "Changed site loading to be cache-able",
+      "Fixed failing to load with empty table contents causing an infinite loading icon"
+    ]
+  },
+  {
     "date": "1.0.0",
     "items": [
       "Changed website visuals to correctly convey the hosting and maintenence situation",
