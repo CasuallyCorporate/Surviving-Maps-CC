@@ -4,17 +4,6 @@ $(document).ready(function () {
     console.log("top doc ready");
 });
 
-const _variantMap = new Map([
-        ["STANDARD",1],
-        ["GREEN_PLANET",2],
-        ["BELOW_BEYOND",3],
-        ["BEYOND_GREEN",4],
-        ["TITO_GREEN_PLANET",5],
-        ["EVANS_GREEN_PLANET",6]
-        ]);
-
-let _query = [];
-let _query64 = "";
 
 function rowClicked(id, site) {
     console.log(id);
@@ -31,30 +20,30 @@ function rowClicked(id, site) {
 
     $('#searchResultTable tbody > tr').removeClass('selected');
 
-    let obj;
+    let siteID;
     if (selected) {
-        obj = {'id': -1};
+        siteID = -1;
     } else {
-        obj = {'id': JSON.parse(site).id};
+        siteID = JSON.parse(site).id;
         row.addClass('selected');
     }
 
-    getDisplay(obj);
+    getDisplay(siteID);
 }
 
-function getDisplay(obj) {
+function getDisplay(siteID) {
     console.log("get Display of site");
-    if(!obj || obj.id < 1) {
+    if(!siteID || siteID.id < 1) {
         return;
     }
 
-    console.log("Site: " + obj.id);
+    console.log("Site: " + siteID);
 
     let display = $("#displayViewer");
     $.ajax({
         type: 'get',
         url: '/getDisplay',
-        data: obj,
+        data: {id: siteID, variant: $("#gameVariant")[0].value},
         success: function (msg) {
             console.log("success display");
             display.html(msg);
@@ -135,9 +124,10 @@ function setFormTriggers() {
 let _dataTableDiv;
 
 function searchData() {
+    console.log("SearchData");
     let form = $("#main_form");
     $("#tablebody").html(loading);
-    
+        
     $.ajax({
         type: form.attr('method'),
         url: form.attr('action'),
@@ -147,9 +137,9 @@ function searchData() {
             _dataTableDiv = msg;
         },
         error: function (xhr) {
-            alert("Search Unavailable/ Query Invalid");
+            alert("Search Unavailable/Query Invalid. The search you attempted may not have an answer in the database, or the site is offline.");
             if (!_dataTableDiv) {
-                console.log("Cannot reload TableDiv. Likely null");
+                $("#tablebody").html(failReload);
             }
             else
             {
@@ -193,6 +183,16 @@ let loading = "<tr>" +
     "</td>" +
     "</tr>";
 
+let failReload = "<tr>" +
+    "<td colspan='11'>" +
+    "<div class=\"clearfix\">\n" +
+    "  <div class=\"float-center\" role=\"status\">\n" +
+    "    <p>Failed to reload table. No table was previously loaded.<br/>Please try a different search</p>" +
+    "  </div>\n" +
+    "</div>" +
+    "</td>" +
+    "</tr>";
+
 let change = function formChange() {
     console.log("change is formChange");
     console.log("change fn");
@@ -220,6 +220,8 @@ function reloadForm() {
 
     let complex = form.attr('action') === "/complex";
     let url = complex ? "/reloadComplexForm" : "/reloadForm";
+    
+    _dataTableDiv = null;
 
     $.ajax({
         type: "GET",
@@ -252,7 +254,6 @@ function reloadMultiSelects() {
     reloadMultiSelect(nla);
     reloadMultiSelect(top);
     reloadMultiSelect(mpn);
-
 }
 
 function reloadMultiSelect(element) {
