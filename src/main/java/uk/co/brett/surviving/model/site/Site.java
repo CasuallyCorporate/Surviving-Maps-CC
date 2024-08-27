@@ -183,7 +183,11 @@ public class Site {
     }
 
     public List<Breakthrough> getBreakthroughs(GameVariant variant) {
-        return breakthroughHashMap.getOrDefault(variant, breakthroughHashMap.get(STANDARD)).getList();
+        List<Breakthrough> siteBreakthroughs = breakthroughHashMap.getOrDefault(variant, breakthroughHashMap.get(STANDARD)).getList();
+        if (siteBreakthroughs.size() >= 5) {
+            siteBreakthroughs.add(4, Breakthrough.INSERT_BREAKTHROUGHS_STATEMENT);
+        }
+        return siteBreakthroughs;
     }
 
     @Override

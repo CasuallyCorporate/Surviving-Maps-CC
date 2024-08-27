@@ -91,12 +91,14 @@
 
             </div>
         </div>
-        <div class="col-md-3">
-            <div th:each="breakthrough  : ${site.getBreakthroughs(variant)}">
-                <div th:text="${breakthrough.getFormatted()}"></div>
+        <div id="siteBreakthroughs" class="col-md-3">
+            <div th:each="breakthrough  : ${site.getBreakthroughs(variant)}" th:switch="${breakthrough.getFormatted()}">
+                <div th:case="INSERT_BREAKTHROUGHS_STATEMENT" th:include="fragments/fragments :: breakthroughStatement"></div>
+                <div th:case="*" th:text="${breakthrough.getFormatted()}"></div>
             </div>
         </div>
     </div>
+
 </th:block>
 
 <th:block th:fragment="tableLoading()">

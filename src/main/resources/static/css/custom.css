@@ -58,3 +58,17 @@ hr {
 #SearchButton a:hover {
     background: linear-gradient(to bottom, rgba(230, 0, 0, 0.8) 0%, rgba(255, 0, 0, 0.7) 100%);
 }
+
+#siteBreakthroughs div > .hover-content {
+    display: none;
+    position: absolute;
+    top: -3.5rem;
+    background: white;
+    border: 0.1rem solid black;
+    box-shadow: 0.3rem 0.3rem 0.3rem grey;
+    overflow: visible;
+}
+#siteBreakthroughs div:hover > .hover-content {
+    display: block;
+    z-index: 4;
+}

@@ -11,7 +11,7 @@ import java.util.concurrent.ConcurrentHashMap;
 import static uk.co.brett.surviving.enums.GameVariant.*;
 
 public enum Breakthrough {
-
+    INSERT_BREAKTHROUGHS_STATEMENT("INSERT_BREAKTHROUGHS_STATEMENT", STANDARD),
     ADVANCED_DRONE_DRIVE("Advanced Drone Drive", STANDARD),
     ALIEN_IMPRINTS("Alien Imprints", STANDARD),
     ANCIENT_TERRAFORMING_DEVICE("Ancient Terraforming Device", GREEN_PLANET),

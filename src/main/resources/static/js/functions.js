@@ -49,7 +49,7 @@ function getDisplay(siteID) {
             display.html(msg);
         },
         error: function () {
-            console.log("failure");
+            console.log("failure to load site data");
         }
     });
 }
