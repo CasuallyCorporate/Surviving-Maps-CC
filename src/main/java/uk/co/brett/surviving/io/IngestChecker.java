@@ -18,9 +18,9 @@ import uk.co.brett.surviving.io.repo.InputHashRepo;
 import javax.persistence.EntityManager;
 import java.io.IOException;
 import java.nio.charset.StandardCharsets;
-import java.util.EnumMap;
 import java.util.List;
 import java.util.Map;
+import java.util.HashMap;
 
 @Service
 public class IngestChecker {
@@ -38,7 +38,6 @@ public class IngestChecker {
 
     @Autowired
     public IngestChecker(EntityManager entityManager, FileHashes fileHashes, InputHashRepo hashRepo) {
-
         this.inputFileMap = fileHashes.getMap();
         this.queryFactory = new JPAQueryFactory(entityManager);
         this.hashRepo = hashRepo;
@@ -46,15 +45,15 @@ public class IngestChecker {
     }
 
     private Map<GameVariant, InputFile> regenerateHashes(Map<GameVariant, InputFile> map) {
-        Map<GameVariant, InputFile> tempMap = new EnumMap<>(GameVariant.class);
-        for (GameVariant variant : GameVariant.values()) {
+        Map<GameVariant, InputFile> tmpMap = new HashMap<GameVariant, InputFile>();
+        for (GameVariant variant : inputFileMap.keySet()) {
             String location = map.get(variant).getResourceLocation();
             String hash = generateHash(location);
             InputFile inputFile = new InputFile(location, hash);
-            tempMap.put(variant, inputFile);
+            tmpMap.put(variant, inputFile);
         }
 
-        return tempMap;
+        return tmpMap;
     }
 
     public boolean checkIntegrity() {
@@ -74,7 +73,7 @@ public class IngestChecker {
         List<InputHash> inputHashes = queryFactory.selectFrom(QInputHash.inputHash).fetch();
         Map<GameVariant, InputFile> dbMap = createMap(inputHashes);
 
-        for (GameVariant variant : GameVariant.values()) {
+        for (GameVariant variant : inputFileMap.keySet()) {
 
             if (!map.get(variant).equals(dbMap.getOrDefault(variant, new InputFile()))) {
                 LOGGER.warn("Database Integrity Check Failed for {}", variant);
@@ -93,7 +92,7 @@ public class IngestChecker {
 
     boolean checkInputFileIntegrity(Map<GameVariant, InputFile> regenMap) {
 
-        for (GameVariant variant : GameVariant.values()) {
+        for (GameVariant variant : inputFileMap.keySet()) {
             if (!inputFileMap.get(variant).equals(regenMap.getOrDefault(variant, new InputFile()))) {
                 LOGGER.warn("File Integrity Check Failed for {}", variant);
                 LOGGER.warn("Expected hash   : {}", inputFileMap.get(variant).getHash());
@@ -113,7 +112,7 @@ public class IngestChecker {
     }
 
     Map<GameVariant, InputFile> createMap(List<InputHash> hashList) {
-        Map<GameVariant, InputFile> map = new EnumMap<>(GameVariant.class);
+        Map<GameVariant, InputFile> map = new HashMap<GameVariant, InputFile>();
 
         for (InputHash hash : hashList) {
             GameVariant variant = hash.getVariant();
@@ -141,7 +140,7 @@ public class IngestChecker {
 
     public void populateInputHashTable() {
 
-        for (GameVariant variant : GameVariant.values()) {
+        for (GameVariant variant : inputFileMap.keySet()) {
             InputHash inputHash = new InputHash(variant, regen.get(variant));
             hashRepo.save(inputHash);
         }

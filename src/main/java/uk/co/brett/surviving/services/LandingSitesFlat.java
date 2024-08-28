@@ -42,6 +42,7 @@ public class LandingSitesFlat implements InitializingBean, DisposableBean, AutoC
     private final ResourcesService resourcesService;
     private final DisastersService disastersService;
     private final FileHashes inputFiles;
+    private final Set<GameVariant> inputFileVariants;
     private final ThreadPoolTaskExecutor ioPoolTaskExecutor;
     private Set<Resources> resourcesSet = new HashSet<>();
     private Set<Disasters> disastersSet = new HashSet<>();
@@ -55,6 +56,7 @@ public class LandingSitesFlat implements InitializingBean, DisposableBean, AutoC
         this.resourcesService = resourcesService;
         this.disastersService = disastersService;
         this.inputFiles = inputFiles;
+        this.inputFileVariants = this.inputFiles.getMap().keySet();
         this.ioPoolTaskExecutor = ioPoolTaskExecutor;
     }
 
@@ -93,7 +95,7 @@ public class LandingSitesFlat implements InitializingBean, DisposableBean, AutoC
                             LandingSiteFlat flat = entry.getValue();
 
                             Map<GameVariant, List<Breakthrough>> btrVarMap = new EnumMap<>(GameVariant.class);
-                            for (GameVariant variant : GameVariant.values()) {
+                            for (GameVariant variant : inputFileVariants) {
                                 //LOGGER.info("for variant: " + variant.name());
                                 btrVarMap.put(variant, flatMap.get(variant).get(key).getBreakthroughs());
                             }
@@ -153,7 +155,7 @@ public class LandingSitesFlat implements InitializingBean, DisposableBean, AutoC
 
 
         LOGGER.info("pre async");
-        for (GameVariant variant : GameVariant.values()) {
+        for (GameVariant variant : inputFileVariants) {
             CompletableFuture<Map<String, LandingSiteFlat>> b = CompletableFuture
                     .supplyAsync(() -> readLandingSites(inp.get(variant).getResourceLocation()), ioPoolTaskExecutor);
 
@@ -189,7 +191,7 @@ public class LandingSitesFlat implements InitializingBean, DisposableBean, AutoC
 
     void populateGlobalMap(Long siteId, Map<GameVariant, List<Breakthrough>> btrVarMap) {
 
-        for (GameVariant v : GameVariant.values()) {
+        for (GameVariant v : inputFileVariants) {
             List<Breakthrough> m1 = btrVarMap.get(v);
             for (Breakthrough b : m1) {
                 Map<GameVariant, List<Long>> m2 = superMap.computeIfAbsent(b, k -> new HashMap<>());
