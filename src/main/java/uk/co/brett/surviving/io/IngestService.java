@@ -27,7 +27,6 @@ public class IngestService {
         this.ingestChecker = checker;
         this.hashRepo = hashRepo;
         this.cleanupService = cleanupService;
-
     }
 
     @PostConstruct

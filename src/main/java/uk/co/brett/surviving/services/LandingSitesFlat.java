@@ -42,6 +42,7 @@ public class LandingSitesFlat implements InitializingBean, DisposableBean, AutoC
     private final ResourcesService resourcesService;
     private final DisastersService disastersService;
     private final FileHashes inputFiles;
+    private final Set<GameVariant> inputFileVariants;
     private final ThreadPoolTaskExecutor ioPoolTaskExecutor;
     private Set<Resources> resourcesSet = new HashSet<>();
     private Set<Disasters> disastersSet = new HashSet<>();
@@ -55,8 +56,8 @@ public class LandingSitesFlat implements InitializingBean, DisposableBean, AutoC
         this.resourcesService = resourcesService;
         this.disastersService = disastersService;
         this.inputFiles = inputFiles;
+        this.inputFileVariants = this.inputFiles.getMap().keySet();
         this.ioPoolTaskExecutor = ioPoolTaskExecutor;
-
     }
 
 
@@ -90,10 +91,12 @@ public class LandingSitesFlat implements InitializingBean, DisposableBean, AutoC
                 .forEach(entry -> {
 
                             String key = entry.getKey();
+                            //LOGGER.info("entrykey: " + key);
                             LandingSiteFlat flat = entry.getValue();
 
                             Map<GameVariant, List<Breakthrough>> btrVarMap = new EnumMap<>(GameVariant.class);
-                            for (GameVariant variant : GameVariant.values()) {
+                            for (GameVariant variant : inputFileVariants) {
+                                //LOGGER.info("for variant: " + variant.name());
                                 btrVarMap.put(variant, flatMap.get(variant).get(key).getBreakthroughs());
                             }
 
@@ -152,7 +155,7 @@ public class LandingSitesFlat implements InitializingBean, DisposableBean, AutoC
 
 
         LOGGER.info("pre async");
-        for (GameVariant variant : GameVariant.values()) {
+        for (GameVariant variant : inputFileVariants) {
             CompletableFuture<Map<String, LandingSiteFlat>> b = CompletableFuture
                     .supplyAsync(() -> readLandingSites(inp.get(variant).getResourceLocation()), ioPoolTaskExecutor);
 
@@ -172,11 +175,12 @@ public class LandingSitesFlat implements InitializingBean, DisposableBean, AutoC
             InputStream fis = Objects.requireNonNull(LandingSitesFlat.class.getResource(file)).openStream();
             CsvReader reader = new CsvReader();
             Reader fileReader = new InputStreamReader(fis);
-
+            LOGGER.info("{} 1 csv reading", file);
             List<LandingSiteFlat> sites = new ArrayList<>(reader.read(fileReader, ImmutableLandingSiteFlat.class));
 
             Map<String, LandingSiteFlat> map = new HashMap<>();
-
+            
+            LOGGER.info("{} 2 short format HashMap", file);
             sites.forEach(s -> map.put(s.shortFormatted(), s));
             LOGGER.info("{} finished", file);
             return map;
@@ -187,7 +191,7 @@ public class LandingSitesFlat implements InitializingBean, DisposableBean, AutoC
 
     void populateGlobalMap(Long siteId, Map<GameVariant, List<Breakthrough>> btrVarMap) {
 
-        for (GameVariant v : GameVariant.values()) {
+        for (GameVariant v : inputFileVariants) {
             List<Breakthrough> m1 = btrVarMap.get(v);
             for (Breakthrough b : m1) {
                 Map<GameVariant, List<Long>> m2 = superMap.computeIfAbsent(b, k -> new HashMap<>());
@@ -200,7 +204,20 @@ public class LandingSitesFlat implements InitializingBean, DisposableBean, AutoC
     void populateBreakthroughMap() {
         for (Breakthrough b : Breakthrough.values()) {
             Map<GameVariant, List<Long>> varMap = superMap.get(b);
-            breakthroughMapRepo.save(new BreakthroughMap(b, varMap));
+            if (varMap != null) {
+                if (varMap.isEmpty()) {
+                    // Unknown error
+                    LOGGER.error("Breakthrough " + b.name() + " returned an empty superMap");
+                    throw new UnsupportedOperationException("Not currently Handled. Unmet error");
+                }
+                breakthroughMapRepo.save(new BreakthroughMap(b, varMap));
+            }
+            else
+            {
+                // Likely come across a stub "Breakthrough" but log anyway
+                LOGGER.error("Breakthrough " + b.name() + " returned a null superMap");
+                continue;
+            }
         }
     }
 

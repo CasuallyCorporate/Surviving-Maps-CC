@@ -11,7 +11,7 @@ import java.util.concurrent.ConcurrentHashMap;
 import static uk.co.brett.surviving.enums.GameVariant.*;
 
 public enum Breakthrough {
-
+    INSERT_BREAKTHROUGHS_STATEMENT("INSERT_BREAKTHROUGHS_STATEMENT", VISUAL_COMPONENT),
     ADVANCED_DRONE_DRIVE("Advanced Drone Drive", STANDARD),
     ALIEN_IMPRINTS("Alien Imprints", STANDARD),
     ANCIENT_TERRAFORMING_DEVICE("Ancient Terraforming Device", GREEN_PLANET),
@@ -118,6 +118,7 @@ public enum Breakthrough {
             case GREEN_PLANET,
                     TITO_GREEN_PLANET,
                     EVANS_GREEN_PLANET -> List.of(STANDARD, GREEN_PLANET);
+            default -> List.of();
         };
 
         return Arrays.stream(Breakthrough.values()).filter(b -> search.contains(b.variant)).toList();

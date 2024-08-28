@@ -107,6 +107,7 @@ public class BreakthroughMap {
             case BELOW_BEYOND -> getBelowBeyond();
             case TITO_GREEN_PLANET -> getTitoGreenPlanet();
             case EVANS_GREEN_PLANET -> getEvansGreenPlanet();
+            default -> new ArrayList<Long>();
         };
     }
 

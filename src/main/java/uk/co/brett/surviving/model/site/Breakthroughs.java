@@ -97,8 +97,8 @@ public class Breakthroughs {
         this.breakthrough10 = btrs.get(9);
         this.breakthrough11 = btrs.get(10);
         this.breakthrough12 = btrs.get(11);
+        this.breakthrough13 = btrs.get(12);
         if (btrs.size() == 17) {
-            this.breakthrough13 = btrs.get(12);
             this.breakthrough14 = btrs.get(13);
             this.breakthrough15 = btrs.get(14);
             this.breakthrough16 = btrs.get(15);
@@ -129,9 +129,9 @@ public class Breakthroughs {
                         breakthrough9,
                         breakthrough10,
                         breakthrough11,
-                        breakthrough12));
+                        breakthrough12,
+                        breakthrough13));
 
-        if (Objects.nonNull(breakthrough13)) list.add(breakthrough13);
         if (Objects.nonNull(breakthrough14)) list.add(breakthrough14);
         if (Objects.nonNull(breakthrough15)) list.add(breakthrough15);
         if (Objects.nonNull(breakthrough16)) list.add(breakthrough16);

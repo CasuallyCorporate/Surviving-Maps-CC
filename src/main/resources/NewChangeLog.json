@@ -1,5 +1,13 @@
 [
   {
+    "date": "1.0.2",
+    "items": [
+      "Added faux breakthrough section informing of planetary anomalies",
+      "Updated map files",
+      "Supporting 13th Breakthrough"
+    ]
+  },
+  {
     "date": "1.0.1",
     "items": [
       "Changed site loading to be cache-able",

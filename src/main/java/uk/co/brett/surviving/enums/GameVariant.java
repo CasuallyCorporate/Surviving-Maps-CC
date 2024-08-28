@@ -11,7 +11,8 @@ public enum GameVariant {
     BELOW_BEYOND("Below and Beyond"),
     BEYOND_GREEN("Beyond + Green"),
     TITO_GREEN_PLANET("Tito: Green Planet"),
-    EVANS_GREEN_PLANET("Evans: Green Planet");
+    EVANS_GREEN_PLANET("Evans: Green Planet"),
+    VISUAL_COMPONENT("Visual components only");
 
     private static final Map<String, GameVariant> ENUM_MAP;
     public static final Map<String, GameVariant> CAP_MAP;
