@@ -36,11 +36,9 @@ public class SimpleFilterService {
         return siteService.fetchSites(10);
     }
 
-    public List<Site> filterResults(SimpleFilterRequest filter) {
-        LOGGER.info(filter);
-
-        if (filter.equalsNoVariant(new SimpleFilterRequest())) return siteService.fetchSites();
-        return siteService.fetchSites(filter);
+    public List<Site> filterResults(SimpleFilterRequest request) {
+        if (request.equalsNoVariant(new SimpleFilterRequest())) return siteService.fetchSites();
+        return siteService.fetchSites(request);
     }
 
     public Site getSingle(Long id) {

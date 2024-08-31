@@ -29,7 +29,6 @@ public class ComplexFilterService {
     }
 
     public List<Site> filter(ComplexFilterRequest request) {
-        LOGGER.info(request);
         return customBreakthroughMapRepo.getIds(request);
     }
 }
