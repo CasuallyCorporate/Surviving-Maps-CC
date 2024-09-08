@@ -3,6 +3,9 @@ package uk.co.brett.surviving.enums;
 import java.util.Collections;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
+import java.util.List;
+import java.util.ArrayList;
+import java.util.Arrays;
 
 public enum GameVariant {
 
@@ -16,6 +19,7 @@ public enum GameVariant {
 
     private static final Map<String, GameVariant> ENUM_MAP;
     public static final Map<String, GameVariant> CAP_MAP;
+    public static final List<GameVariant> PublicVariants;
 
     static {
         Map<String, GameVariant> map = new ConcurrentHashMap<>();
@@ -32,6 +36,10 @@ public enum GameVariant {
         capmap.put("TITO_GREEN_PLANET", TITO_GREEN_PLANET);
         capmap.put("EVANS_GREEN_PLANET", EVANS_GREEN_PLANET);
         CAP_MAP = Collections.unmodifiableMap(capmap);
+        
+        ArrayList<GameVariant> noVisList = new ArrayList<>(Arrays.asList(GameVariant.values()));
+        noVisList.remove(GameVariant.VISUAL_COMPONENT);
+        PublicVariants = Collections.unmodifiableList(noVisList);
     }
 
     private final String formatted;

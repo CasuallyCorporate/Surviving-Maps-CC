@@ -16,7 +16,7 @@ hr {
     text-align: left !important
 }
 
-#example-reset-button {
+#gameVariant, #breakthroughs, #resources, #disasters {
     cursor: pointer;
 }
 
@@ -41,7 +41,7 @@ hr {
     justify-content: center;
 }
 #SearchButton a {
-    color: #333 !important;
+    color: black;
     border: 1px solid rgba(0, 0, 0, 0.3);
     background: linear-gradient(to bottom, rgba(230, 230, 230, 0.1) 0%, rgba(0, 0, 0, 0.1) 100%);
     box-sizing: border-box;
@@ -55,8 +55,13 @@ hr {
     user-select: none;
 }
 
+#SearchButton .changed-search {
+    background: linear-gradient(to bottom, rgba(255, 150, 0, 1) 0%, rgba(255, 150, 50, 0.7) 100%);
+}
+
 #SearchButton a:hover {
-    background: linear-gradient(to bottom, rgba(230, 0, 0, 0.8) 0%, rgba(255, 0, 0, 0.7) 100%);
+    background: linear-gradient(to bottom, rgba(0, 230, 0, 1) 0%, rgba(0, 255, 0, 0.7) 100%);
+    text-decoration: none;
 }
 
 #siteBreakthroughs div > .hover-content {

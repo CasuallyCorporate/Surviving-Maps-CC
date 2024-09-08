@@ -1,5 +1,15 @@
 [
   {
+    "date": "1.0.3",
+    "items": [
+      "Added additional breakthrough advisories",
+      "UI now reacts to changing search parameters, and the search button colour advises of pending changes",
+      "Fixed UI bug showing visual only 'game variant'",
+      "Added cursor over to UI elements, renamed UI elements",
+      "Changed JavaScript functions"
+    ]
+  },
+  {
     "date": "1.0.2",
     "items": [
       "Added faux breakthrough section informing of planetary anomalies",
