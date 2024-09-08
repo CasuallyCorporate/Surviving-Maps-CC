@@ -128,7 +128,11 @@ function checkEnable(res) {
 function formChange(formDivID) {
     console.log("function formChange");
     if (!formDivID) { console.log("No formID"); }
-    else { console.log("formID: " + formDivID.data.id); }
+    else { // UI changes
+        console.log("formID: " + formDivID.data.id);
+        // Check for changes between Search() 's
+        // Change search button with css class
+    }
     
     return false;
 };
