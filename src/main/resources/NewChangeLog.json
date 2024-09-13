@@ -1,4 +1,11 @@
 [
+    {
+    "date": "1.0.4",
+    "items": [
+      "Tidied advisories, including for B&B",
+      "Small changes toward supporting PA-less map files"
+    ]
+  },
   {
     "date": "1.0.3",
     "items": [

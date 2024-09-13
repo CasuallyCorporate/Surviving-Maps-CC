@@ -175,9 +175,11 @@ public class LandingSitesFlat implements InitializingBean, DisposableBean, AutoC
             InputStream fis = Objects.requireNonNull(LandingSitesFlat.class.getResource(file)).openStream();
             CsvReader reader = new CsvReader();
             Reader fileReader = new InputStreamReader(fis);
+            
             LOGGER.info("{} 1 csv reading", file);
             List<LandingSiteFlat> sites = new ArrayList<>(reader.read(fileReader, ImmutableLandingSiteFlat.class));
-
+            
+            LOGGER.info("{} 1.5 creating HashMap", file);
             Map<String, LandingSiteFlat> map = new HashMap<>();
             
             LOGGER.info("{} 2 short format HashMap", file);

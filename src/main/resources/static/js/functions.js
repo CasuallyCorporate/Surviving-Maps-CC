@@ -155,7 +155,7 @@ function searchData() {
             _dataTableDiv = msg;
         },
         error: function (xhr) {
-            alert("Search Unavailable/Query Invalid. The search you attempted may not have an answer in the database, or the site is offline.");
+            alert("Please try your search again. Otherwise the search you attempted may be Invalid or the site is currently offline.");
             if (!_dataTableDiv) {
                 $("#tablebody").html(failReload);
             }

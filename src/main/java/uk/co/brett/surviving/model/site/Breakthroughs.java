@@ -104,8 +104,6 @@ public class Breakthroughs {
             this.breakthrough16 = btrs.get(15);
             this.breakthrough17 = btrs.get(16);
         }
-
-
     }
 
     public GameVariant getVariant() {
@@ -117,12 +115,16 @@ public class Breakthroughs {
     }
 
     public List<Breakthrough> getList() {
-        List<Breakthrough> list = new ArrayList<>(
-                List.of(breakthrough1,
-                        breakthrough2,
-                        breakthrough3,
-                        breakthrough4,
-                        breakthrough5,
+        List<Breakthrough> list = new ArrayList<>();
+        // Add PA's if they exist
+        if (Objects.nonNull(breakthrough1)) list.add(breakthrough1);
+        if (Objects.nonNull(breakthrough2)) list.add(breakthrough2);
+        if (Objects.nonNull(breakthrough3)) list.add(breakthrough3);
+        if (Objects.nonNull(breakthrough4)) list.add(breakthrough4);
+
+        // Breakthroughs 5 - 13 should exist if ingest was a success
+        list.addAll(
+                List.of(breakthrough5,
                         breakthrough6,
                         breakthrough7,
                         breakthrough8,
@@ -132,6 +134,7 @@ public class Breakthroughs {
                         breakthrough12,
                         breakthrough13));
 
+        // The remainder are optional in the csv's
         if (Objects.nonNull(breakthrough14)) list.add(breakthrough14);
         if (Objects.nonNull(breakthrough15)) list.add(breakthrough15);
         if (Objects.nonNull(breakthrough16)) list.add(breakthrough16);

@@ -184,24 +184,20 @@ public class Site {
 
     public List<Breakthrough> getBreakthroughs(GameVariant variant) {
         List<Breakthrough> siteBreakthroughs = breakthroughHashMap.getOrDefault(variant, breakthroughHashMap.get(variant)).getList();
-        if (variant.equals(GameVariant.BELOW_BEYOND)) {
-            // Remove first 4 breakthroughs
-            siteBreakthroughs.remove(0);
-            siteBreakthroughs.remove(0);
-            siteBreakthroughs.remove(0);
-            siteBreakthroughs.remove(0);
-            siteBreakthroughs.add(0, Breakthrough.Visual_BB_Statement);
-            return siteBreakthroughs;
-        }
-        else if (siteBreakthroughs.size() >= 5) {
+
+        if (siteBreakthroughs.size() >= 5) {
             // Add note for Planetary Anomalies
-            if (variant.equals(GameVariant.BEYOND_GREEN)){
-                siteBreakthroughs.add(4, Breakthrough.Visual_MayBB_Statement);
+            switch(variant) {
+                case BELOW_BEYOND -> {
+                    siteBreakthroughs.add(4, Breakthrough.Visual_BB_Statement);
+                }
+                case BEYOND_GREEN -> {
+                    siteBreakthroughs.add(4, Breakthrough.Visual_MayBB_Statement);
+                }
+                default -> {
+                    siteBreakthroughs.add(4, Breakthrough.Visual_PA_Statement);
+                }
             }
-            else {
-                siteBreakthroughs.add(4, Breakthrough.Visual_PA_Statement);
-            }
-            
         }
         return siteBreakthroughs;
     }
